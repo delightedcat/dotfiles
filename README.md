@@ -1,10 +1,11 @@
 # dotfiles
-My preferred dotfile configurations for my development environment.
+My preferred development environment and project dotfile configurations.
 
 ## Visual Studio
 `/vscode/settings.json`
 
 Theme: [Gruvbox Dark Hard](https://marketplace.visualstudio.com/items?itemName=jdinhlife.gruvbox)
+
 Font: [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 
 ### Extensions

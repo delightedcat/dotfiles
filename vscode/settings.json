@@ -1,6 +1,7 @@
 {
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     "workbench.colorTheme": "Gruvbox Dark Hard",
+    "editor.fontFamily": "Fantasque Sans Mono, monospace",
     "editor.codeLens": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
