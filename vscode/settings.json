@@ -4,5 +4,5 @@
     "editor.fontFamily": "Fantasque Sans Mono, monospace",
     "editor.codeLens": false,
     "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
+    "explorer.confirmDelete": false
 }
