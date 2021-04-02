@@ -16,10 +16,6 @@ sudo apt purge \
     celluloid \
     gnote \
     hexchat-common \
-    hexchat-perl \
-    hexchat-plugins \
-    hexchat-python3 \
-    hexchat \
     hypnotix \
     libreoffice-common \
     onboard-common \
