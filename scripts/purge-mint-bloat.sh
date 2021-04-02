@@ -9,21 +9,16 @@ sudo apt purge \
     hexchat-python3 \
     hexchat \
     hypnotix \
-    libreoffice-help-common \
+    libreoffice-common \
     onboard-common \
-    onboard \
-    pix-data \
-    pix-dbg \
     pix \
-    redshift-gtk \
+    pix-data \
     redshift \
     rhythmbox \
     rhythmbox-data \
-    rhythmbox-plugin-tray-icon \
-    rhythmbox-plugins \
+    seahorse \
     thunderbird \
     transmission-common \
-    transmission-gtk \
     warpinator
 
 sudo apt autoremove --purge
