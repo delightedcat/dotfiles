@@ -1,9 +1,0 @@
-{
-    "workbench.colorTheme": "Gruvbox Dark Medium",
-    "editor.fontFamily": "FantasqueSansMono Nerd Font Mono, monospace",
-    "editor.fontSize": 15,
-    "editor.codeLens": false,
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "telemetry.enableTelemetry": false
-}
