@@ -1,4 +1,4 @@
 
-cp backgrounds/* /usr/share/backgrounds
-cp icons/* /usr/share/icons
-cp themes/* /usr/share/themes
+cp -r backgrounds/* /usr/share/backgrounds
+cp -r icons/* /usr/share/icons
+cp -r themes/* /usr/share/themes
