@@ -17,6 +17,17 @@ ALSA_CARDS="hda-intel" # Set this to match your own sound card vendor
 ACCEPT_KEYWORDS="~amd64" # Allows for "unstable" packages, leave this out if you prefer a more stable system
 ...
 ```
+Next to these flags, the tool `cpuid2cpuflags` can be used to determine the optimal CPU flags
+for your system. It can be used as follows:
+```
+emerge --ask app-portage/cpuid2cpuflags
+cpuid2cpuflags
+```
+This command will return values that should be defined in your `CPU_FLAGS_X86` flag. Alternatively,
+you might need `CPU_FLAGS_PPC` or `CPU_FLAGS_ARM` depending on your CPU architecutre.
+
+For more information, on CPU flags, check [this article](https://wiki.gentoo.org/wiki/CPU_FLAGS_X86).
+
 This can prevent a few dozen of packages from being compiled on your system and will save you time
 in general. My USE flags are my personal preferences and can and should be changed according to your
 own liking.
