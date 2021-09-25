@@ -1,5 +1,5 @@
 
-" some basic settings..
+" Some basic settings..
 syntax on
 set tabstop=4
 set expandtab
@@ -7,7 +7,7 @@ set autoindent
 set shiftwidth=4
 set number
 
-" some vim-plug plugins.
+" Some vim-plug plugins.
 call plug#begin()
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'dense-analysis/ale'
@@ -15,6 +15,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'itchyny/lightline.vim'
@@ -30,16 +31,18 @@ let g:ale_sign_style_warning = '·'
 
 let g:ale_linters = { 'cs': ['OmniSharp'] }
 
-" set the hard gruvbox theme before setting up the actual scheme.
+" Set the hard gruvbox theme before setting up the actual scheme.
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 
-" override the ugly default gruvbox color to match my window manager.
+" Override the ugly default gruvbox color to match my window manager.
 highlight Normal ctermfg=white ctermbg=black
 
-" start NERDTree upon launch.
-autocmd VimEnter * NERDTree | wincmd p
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
-" automatically close NERDTree when it is the last open window.
+" Automatically close NERDTree when it is the last open window.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
