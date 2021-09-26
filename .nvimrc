@@ -16,6 +16,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'itchyny/lightline.vim'
@@ -41,6 +43,9 @@ colorscheme gruvbox
 " Override the ugly default gruvbox color to match my window manager.
 highlight Normal ctermfg=white ctermbg=black
 
+" Show hidden items in NERDTree by default.
+let NERDTreeShowHidden=1
+
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
@@ -51,4 +56,3 @@ autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 
 " Automatically close NERDTree when it is the last open window.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
