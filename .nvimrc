@@ -23,6 +23,9 @@ Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'maximbaz/lightline-ale'
 call plug#end()
 
+" A copy of the original pairs minus the () autocompletion.
+let g:AutoPairs={'[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
 let g:ale_sign_info = '·'
@@ -42,6 +45,9 @@ highlight Normal ctermfg=white ctermbg=black
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+
+" Automatically refresh NERDTree on buffer write.
+autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 
 " Automatically close NERDTree when it is the last open window.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
