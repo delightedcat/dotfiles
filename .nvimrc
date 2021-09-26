@@ -43,6 +43,12 @@ colorscheme gruvbox
 " Override the ugly default gruvbox color to match my window manager.
 highlight Normal ctermfg=white ctermbg=black
 
+" Some basic NERDTree shortcuts to ease things up a bit.
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
 " Show hidden items in NERDTree by default.
 let NERDTreeShowHidden=1
 
