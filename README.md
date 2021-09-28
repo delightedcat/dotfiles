@@ -1,13 +1,23 @@
 # dotfiles
 My preferred development environment and project dotfile configurations.
 
-## Visual Studio
-`/vscode/settings.json`
+- **Font**: [Hack Nerd Font](https://github.com/ryanoasis/nerd-fonts) - A patched
+  version of the [Hack](https://github.com/source-foundry/Hack) font.
+- **Theme**: [gruvbox](https://github.com/morhetz/gruvbox) - A retro-styled
+  color theme for Vim and [Visual Studio Code](https://github.com/source-foundry/Hack).
 
-- Theme: [Gruvbox Dark Hard](https://marketplace.visualstudio.com/items?itemName=jdinhlife.gruvbox)
-- Font: [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
+## GTK+ Theme & Icons
+
+- [gruvbox-dark-gtk](https://github.com/jmattheis/gruvbox-dark-gtk)
+- [gruvbox-dark-icons-gtk](https://github.com/jmattheis/gruvbox-dark-icons-gtk)
+
+## Neovim
+`/nvim/init.vim`
+
+## Visual Studio Code
+`/vscode/settings.json`
 
 ### Extensions
 - [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-- [PHP Intellephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
+- [Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
