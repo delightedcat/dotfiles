@@ -148,5 +148,13 @@ When pulling in packages, they are of course being compiled from source. This pr
 specific directory on the system, namely `/var/tmp/portage`. However, compiling something takes a
 lot of read and write cycles on your precious SSD or HDD.
 
-To avoid this, you can use a TMPFS on this directory to avoid many cycles. The process is further
-explained in [this article from the Gentoo handbook](https://wiki.gentoo.org/wiki/Portage_TMPDIR_on_tmpfs).
+To avoid this, you can use a TMPFS on this directory to avoid many cycles.
+The process is further explained in [this article from the Gentoo handbook](https://wiki.gentoo.org/wiki/Portage_TMPDIR_on_tmpfs).
+
+## Disable unused TTYs
+
+By default, Gentoo will enable a total of 6 TTYs on your system. These are
+defined in your `/etc/inittab` file. You'll most likely only need one or two
+TTYs. Find the corresponding lines using `grep -n '/sbin/agetty' /etc/inittab`
+and place a `#` in front of them using your text editor of choice to comment
+them out.
