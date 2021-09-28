@@ -175,6 +175,13 @@ To avoid this, you can use a TMPFS on this directory to avoid many cycles.
 The process is further explained in [this article from the Gentoo handbook
 ](https://wiki.gentoo.org/wiki/Portage_TMPDIR_on_tmpfs).
 
+## Install and configure ccache
+`ccache` is a handy application that prevents repeated compilcation of C and C++
+objects. If you tend to change your `USE` flags a lot or don't want to worry
+about recompiling a large program all over again upon failure, this might be for
+you. A more extensive guide on how to set this up can be found on [this page of
+the Gentoo handbook](https://wiki.gentoo.org/wiki/Ccache).
+
 ## Disable unused TTYs
 
 By default, Gentoo will enable a total of 6 TTYs on your system. These are
