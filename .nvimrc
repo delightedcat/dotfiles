@@ -1,49 +1,49 @@
 
-" Some basic settings..
-syntax on
-set tabstop=4
-set expandtab
-set autoindent
-set shiftwidth=4
-set number
-
-" Some vim-plug plugins.
+" -----------------------------------
+" PLUGINS
+" -----------------------------------
 call plug#begin()
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'dense-analysis/ale'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'itchyny/lightline.vim'
-Plug 'shinchu/lightline-gruvbox.vim'
-Plug 'maximbaz/lightline-ale'
+Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-" A copy of the original pairs minus the () autocompletion.
-let g:AutoPairs={'[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''"}
+" -----------------------------------
+" SETTINGS
+" -----------------------------------
+set encoding=utf-8
+scriptencoding utf-8
 
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
-let g:ale_sign_info = '·'
-let g:ale_sign_style_error = '·'
-let g:ale_sign_style_warning = '·'
+syntax enable
+filetype plugin indent on
 
-let g:ale_linters = { 'cs': ['OmniSharp'] }
+set tabstop=4
+set expandtab
+set autoindent
+set shiftwidth=4
+set textwidth=80
+set cmdheight=2
+set number
+set ruler
+set mouse=a
+set autochdir
+set updatetime=300
 
-" Set the hard gruvbox theme before setting up the actual scheme.
+" -----------------------------------
+" COLORSCHEME
+" -----------------------------------
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
-
-" Override the ugly default gruvbox color to match my window manager.
+" Override gruvbox's background with a custom background color.
 highlight Normal ctermfg=white ctermbg=black
 
-" Some basic NERDTree shortcuts to ease things up a bit.
+" -----------------------------------
+" NERDTREE
+" -----------------------------------
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
@@ -62,3 +62,17 @@ autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 
 " Automatically close NERDTree when it is the last open window.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" -----------------------------------
+" COC
+" -----------------------------------
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
