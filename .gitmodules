@@ -1,6 +1,0 @@
-[submodule "icons/paper-icon-theme"]
-	path = icons/paper-icon-theme
-	url = git@github.com:snwh/paper-icon-theme.git
-[submodule "themes/Klaus"]
-	path = themes/Klaus
-	url = git@github.com:tsbarnes/Klaus.git

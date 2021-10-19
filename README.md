@@ -8,8 +8,8 @@ My preferred development environment and project dotfile configurations.
 
 ## GTK+ Theme & Icons
 
-- [gruvbox-dark-gtk](https://github.com/jmattheis/gruvbox-dark-gtk)
-- [gruvbox-dark-icons-gtk](https://github.com/jmattheis/gruvbox-dark-icons-gtk)
+- [Klaus](https://github.com/tsbarnes/Klaus)
+- [gruvbox-material-gtk](https://github.com/TheGreatMcPain/gruvbox-material-gtk)
 
 ## Neovim
 `/nvim/init.vim`
