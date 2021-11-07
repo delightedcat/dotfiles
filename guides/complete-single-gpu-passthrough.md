@@ -119,7 +119,7 @@ Go ahead and create a new virtual machine as you normally would. Before finishin
     - Uncollapse "Advanced options"
     - Disk bus -> VirtIO
 - NIC
-    - Device model -> CDROM device
+    - Device model -> virtio
 
 Next, we need to add the VirtIO ISO to the VM before finishing up the configuration using the "Add Hardware" option.
 
