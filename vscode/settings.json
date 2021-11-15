@@ -1,9 +1,0 @@
-{
-    "workbench.colorTheme": "Gruvbox Dark Hard",
-    "editor.fontFamily": "Hack Nerd Font, monospace",
-    "editor.codeLens": false,
-    "explorer.confirmDragAndDrop": false,
-    "editor.formatOnType": true,
-    "explorer.confirmDelete": false,
-    "editor.rulers": [ 80 ]
-}
