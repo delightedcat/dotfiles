@@ -175,6 +175,23 @@ To avoid this, you can use a TMPFS on this directory to avoid many cycles.
 The process is further explained in [this article from the Gentoo handbook
 ](https://wiki.gentoo.org/wiki/Portage_TMPDIR_on_tmpfs).
 
+## Increase boot time
+
+By default, OpenRC will start all services on the system one by one. This means
+that if one task is being slow, it will stop the others from running until it
+has completed. To fix this, set the following option in `/etc/rc.conf`:
+```
+rc_parallel="YES"
+```
+
+Another way to increase boot time is by installing `app-shells/dash` and settings
+it as the default shell. It is said to be even more effective than making the system
+boot up in parallel.
+```
+emerge --ask app-shells/dash
+ln -sf /bin/dash /bin/sh
+```
+
 ## Install and configure ccache
 `ccache` is a handy application that prevents repeated compilcation of C and C++
 objects. If you tend to change your `USE` flags a lot or don't want to worry
