@@ -1,12 +1,15 @@
 # dotfiles
-My preferred development environment and project dotfile configurations.
+My preferred development machine and project configurations files.
 
-- **Font**: [Hack Nerd Font](https://github.com/ryanoasis/nerd-fonts) - A monospace terminal/editor font for hackers B).
-- **Theme**: [gruvbox](https://github.com/morhetz/gruvbox) - A retro-styled color theme for Vim.
+- **Font**: [JetBrains Mono](https://www.jetbrains.com/lp/mono)
+- **Theme**: [gruvbox](https://github.com/morhetz/gruvbox)
 
-## GTK+ Theme & Icons
+## Theme & Icons
+My desktop environment of choice is Xfce under Gentoo GNU/Linux.
+The terminal color scheme for Xfce that I'm using can be found in `xfce4`.
 
 - [gruvbox-dark-gtk](https://github.com/jmattheis/gruvbox-dark-gtk)
-- [Papirus-Dark](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
+- [gruvbox-dark-icons-gtk](https://github.com/jmattheis/gruvbox-dark-icons-gtk)
 
 Additional CSS tweaks for the GTK+ theme can be found in `gtk-3.0`.
+These should be copied to the `~/.config/gtk-3.0` directory.
