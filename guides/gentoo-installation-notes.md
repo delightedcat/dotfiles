@@ -95,7 +95,7 @@ Since we are compiling a minimal kernel, it is important to pay attention to the
 - To enable isolation or limitation of resources usage of a collection of processes, make sure you enable the options that you need starting with `CGROUP`:
 	- `CGROUP_SCHED`
 	- `CGROUP_FREEZER`
-	- `CROUP_CPUACCT`
+	- `CGROUP_CPUACCT`
 	- ...
 - To enable cpusets (making them available at `/dev/cpusets`, enable to option: `CPUSETS`.
 
