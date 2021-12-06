@@ -10,9 +10,23 @@ and is based on the [installation guide for AMD64](https://wiki.gentoo.org/wiki/
 ## Optimal USE flags setup
 
 Whereas the Gentoo installation guide will tell you to set the `USE` flags *after* you did your initial `@world` update,
-I tend to set my `USE` flags *before*. Why? Because it saves time.
+I tend to set my `MAKEOPTS` and `EMERGE_DEFAULT_OPTS` options and `USE` flags *before*. Why? Because it saves time.
 
-My `USE` flags on desktop installation usually look like this:
+For my `MAKEOPTS` variable I tend to set the maximum number of threads that are available to my system during the initial install. The value you should add is equal to the output of the command:
+```
+nproc
+```
+Since my system has 8 cores with 2 threads each, my `MAKEOPTS` variable looks like this:
+```
+MAKEOPTS="-j16"
+```
+Some people send to set the `-l` flag as well to limit the load average of the system, but I've found that this increases compile times dramatically for no real reason.
+
+Another trick to speed up compilation is by turning of the huge amount of compiler output that Portage writes. On the long run, not writing much output to the terminal can and will save time, especially when installing larger packages.
+```
+EMERGE_DEFAULT_OPTS="--quiet-build=y"
+```
+My global `USE` flags on desktop installation usually look like this:
 ```
 USE="X gtk pulseaudio -bluetooth -branding -cups -gnome -introspection -kde -qt5 -systemd -vala"
 ```
