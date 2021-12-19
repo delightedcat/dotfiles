@@ -22,6 +22,8 @@ MAKEOPTS="-j16"
 ```
 Some people send to set the `-l` flag as well to limit the load average of the system, but I've found that this increases compile times dramatically for no real reason.
 
+**NOTE:** You can use `nproc` to find out which value your `-j` flag should use.
+
 Another trick to speed up compilation is by turning of the huge amount of compiler output that Portage writes. On the long run, not writing much output to the terminal can and will save time, especially when installing larger packages.
 ```
 EMERGE_DEFAULT_OPTS="--quiet-build=y"
@@ -62,6 +64,14 @@ This can be translated to the following variable in your `make.conf`:
 ```
 CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sse sse2 sse3 sse4_1 sse4_2 ssse3"
 ```
+
+## Use binary versions of large packages
+
+Gentoo is known to be a source-based distribution, but if you're in a time rush, you can use binary versions of packages instead of compiling them yourself.
+
+Sure, people will say that binary packages defeat the purpose of Gentoo. But sometimes it can save a lot of time to use `rust-bin` as a oneshot dependency to compile the desktop profile.
+
+I tend to use binary packages only to speed up the installation. Later on when I have everything I need, I tend to compile the source-based versions of the software anyway.
 
 ## Minimal kernel configuration
 
@@ -112,6 +122,10 @@ Since we are compiling a minimal kernel, it is important to pay attention to the
 	- `CGROUP_CPUACCT`
 	- ...
 - To enable cpusets (making them available at `/dev/cpusets`, enable to option: `CPUSETS`.
+
+If you're running new hardware (e.g. you bought a new PC) it might be helpful to first compile a kernel using `genkernel` and boot into it to determine which modules are being used with `lsmod` and if there's any firmware being used with `mdesg | grep -i firmware`. This can be especially useful if you want your kernel to be complete and/or your hardware needs any of the proprietary firmware blobs from `sys-kernel/linux-firmware`.
+
+Running `lsmod` from the installation medium will yield most modules required, but it will skip modules like graphics drivers or other stuff that's not loaded from the installation medium.
 
 ## Use Git instead of rsync for Portage
 
