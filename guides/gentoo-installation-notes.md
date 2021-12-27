@@ -116,12 +116,15 @@ Since we are compiling a minimal kernel, it is important to pay attention to the
 - Not all libraries will compile without compatibility for the 32-bit `time_t` type in C. These libraries will require `COMPAT_32BIT_TIME` to be enabled.
 - Since disk space is pretty cheap these days and assuming your boot partition is large enough, let's prefer performance over disk space with `CC_OPTIMIZE_FOR_PERFORMANCE`.
 - POSIX Message Queues are able to exchange data between processes to speed them up. Enable it with `POSIX_MQUEUE`.
-- To enable isolation or limitation of resources usage of a collection of processes, make sure you enable the options that you need starting with `CGROUP`:
-	- `CGROUP_SCHED`
-	- `CGROUP_FREEZER`
-	- `CGROUP_CPUACCT`
-	- ...
-- To enable cpusets (making them available at `/dev/cpusets`, enable to option: `CPUSETS`.
+- It's possible to only use the CPU clock that is currently needed. This usually saves power and can be enabled using the following options:
+    - `CPU_FREQ_GOV_POWERSAVE`
+    - `CPU_FREQ_GOV_USERSPACE`
+    - `CPU_FREQ_GOV_ONDEMAND`
+    - `CPU_FREQ_GOV_CONSERVATIVE`
+- At last, it's also possible to harden the kernel a bit by putting stack protection and in-kernel TLS in place:
+    - `STACKPROTECTOR`
+    - `STACKPROTECTOR_STRONG`
+    - `TLS`
 
 If you're running new hardware (e.g. you bought a new PC) it might be helpful to first compile a kernel using `genkernel` and boot into it to determine which modules are being used with `lsmod` and if there's any firmware being used with `mdesg | grep -i firmware`. This can be especially useful if you want your kernel to be complete and/or your hardware needs any of the proprietary firmware blobs from `sys-kernel/linux-firmware`.
 
