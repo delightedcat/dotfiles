@@ -115,7 +115,6 @@ Since we are compiling a minimal kernel, it is important to pay attention to the
 	- `ACPI_SLEEP`
 - Not all libraries will compile without compatibility for the 32-bit `time_t` type in C. These libraries will require `COMPAT_32BIT_TIME` to be enabled.
 - Since disk space is pretty cheap these days and assuming your boot partition is large enough, let's prefer performance over disk space with `CC_OPTIMIZE_FOR_PERFORMANCE`.
-- POSIX Message Queues are able to exchange data between processes to speed them up. Enable it with `POSIX_MQUEUE`.
 - It's possible to only use the CPU clock that is currently needed. This usually saves power and can be enabled using the following options:
     - `CPU_FREQ_GOV_POWERSAVE`
     - `CPU_FREQ_GOV_USERSPACE`
@@ -125,6 +124,13 @@ Since we are compiling a minimal kernel, it is important to pay attention to the
     - `STACKPROTECTOR`
     - `STACKPROTECTOR_STRONG`
     - `TLS`
+- Some other general options you might find with including:
+    - `POSIX_MQUEUE`
+    - `WATCH_QUEUE`
+    - `CROSS_MEMORY_ATTACH`
+    - `AUDIT`
+    - `PROFILING`
+    - `GCC_PLUGINS`
 
 If you're running new hardware (e.g. you bought a new PC) it might be helpful to first compile a kernel using `genkernel` and boot into it to determine which modules are being used with `lsmod` and if there's any firmware being used with `mdesg | grep -i firmware`. This can be especially useful if you want your kernel to be complete and/or your hardware needs any of the proprietary firmware blobs from `sys-kernel/linux-firmware`.
 
