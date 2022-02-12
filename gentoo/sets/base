@@ -1,0 +1,11 @@
+app-admin/doas
+app-admin/logrotate
+app-admin/sysklogd
+app-editors/nano
+net-misc/dhcpcd
+sys-boot/grub
+sys-boot/os-prober
+sys-fs/btrfs-progs
+sys-fs/dosfstools
+sys-process/cronie
+sys-process/lsof
