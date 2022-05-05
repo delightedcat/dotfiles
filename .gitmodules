@@ -1,6 +1,3 @@
-[submodule "themes/gruvbox-dark-gtk"]
-	path = themes/gruvbox-dark-gtk
-	url = https://github.com/delightedcat/gruvbox-dark-gtk
-[submodule "icons/gruvbox-dark-icons-gtk"]
-	path = icons/gruvbox-dark-icons-gtk
-	url = https://github.com/delightedcat/gruvbox-dark-icons-gtk
+[submodule "themes/darkbox-gtk"]
+	path = themes/darkbox-gtk
+	url = https://github.com/delightedcat/darkbox-gtk.git
