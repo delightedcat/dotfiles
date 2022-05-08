@@ -54,7 +54,7 @@ Compiling a kernel by hand is difficult in this day and age. Hardware is becomin
 Therefore it's my personal opinion that compiling a kernel by going through each option by hand is hard to do and probably not worth it, even using `lsmod` and `lspci` and all those tools.
 
 My personal solution is basing the kernel off the previously installed kernel and enabling only what you need through `make localmodconfig`. The process looks mostly like this:
-```
+```sh
 # sys-kernel/gentoo-sources is emerged with the symlink flag enabled
 emerge --ask gentoo-sources
 cd /usr/src/linux
@@ -71,12 +71,15 @@ dracut --hostonly
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
+If your new kernel is working as intended, you can (and should) delete the old kernel using either `emerge --depclean gentoo-kernel` or `emerge --depclean genkernel`.
+Keep in mind that you might still need to remove kernels and modules from `/usr/src`, `/boot` and `lib/modules`. You can check the currently running kernel version using `uname -r`
+
 #### Handling Firmware Blobs
 
 Note that it's recommend to not load redistributed firmware from `linux-firmware` in userspace.
 The best solution to this problem is to embed the binary firmware blobs directly into the kernel.
 
-```
+```sh
 # sys-kernel/linux-firmware is emerged with savedconfig enabled to modify which firmware is installed
 emerge --ask linux-firmware
 # write the currently loaded firmware blobs (only works right after a reboot)
@@ -85,7 +88,7 @@ dmesg | grep -i firmware | tee firmware.txt
 You can now modify `/etc/portage/savedconfig/sys-kernel/linux-firmware<version>` to only contain the needed firmware according to `dmesg` and re-emerge `linux-firmware`.
 
 Using this list of used firmware modules, you can embed the firmware blobs in the `EXTRA_FIRMWARE` option in the kernel configuration.
-```
+```sh
 # copy-paste the output of this command and paste it in EXTRA_FIRMWARE in /usr/src/linux/.config
 while read $(cat /etc/portage/savedconfig/sys-kernel/linux-firmware<version> | grep -v '^#') ; do echo -n $LINE ; done
 ```
