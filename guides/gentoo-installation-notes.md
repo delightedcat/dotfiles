@@ -43,6 +43,17 @@ Please note that these steps differ from user to user and you should always tail
 - Install bootloader on `/boot` (e.g. `grub-install --target=x86_64-efi --efi-directory=/boot --removable` and `grub-mkconfig -o /boot/grub/grub.cfg`);
 - Reboot the system and verify everything is working;
 
+### Don't Create a Swap Partition
+
+The Gentoo handbook recommends creating a swap partition that's twice the size of the available RAM. This is absurd to do for most modern systems.
+In fact, I recommend to not create a swap partition at all. Instead, I recommend using a swapfile since it can be resized dynamically and give your root partition more space.
+
+A swapfile is usually a plain file named `/swapfile` or simply `/swap` that is pre-allocated and formatted as a swap filesystem.
+```sh
+# creates a swapfile at /swapfile of 1 GB in size
+# the count can be determined by doing: count = <size in bytes> / bs
+dd if=/dev/zero of=/swapfile bs=1024 count=1048576
+```
 ### Custom Kernel
 
 As you might have noticed, compiling a kernel through `sys-kernel/gentoo-kernel` or `genkernel` takes a very long time.
@@ -125,15 +136,3 @@ tmpfs /var/tmp/portage tmpfs size=4G,uid=portage,gid=portage,mode=775,nosuid,noa
 You can now run `mount -a` to mount everything in `/etc/fstab`. The TMPFS should now be mounted on `/var/tmp/portage` according to `df -h`.
 
 Note that you should set the size according to how much RAM you can spare as temporary disk space. In my case I have 32 GB of RAM with a 4 GB swapfile, therefore I set the size to 32 GB. This is larger than what most packages will require.
-
-### Don't Create a Swap Partition
-
-The Gentoo handbook recommends creating a swap partition that's twice the size of the available RAM. This is absurd to do for most modern systems.
-In fact, I recommend to not create a swap partition at all. Instead, I recommend using a swapfile since it can be resized dynamically and give your root partition more space.
-
-A swapfile is usually a plain file named `/swapfile` or simply `/swap` that is pre-allocated and formatted as a swap filesystem.
-```sh
-# creates a swapfile at /swapfile of 1 GB in size
-# the count can be determined by doing: count = <size in bytes> / bs
-dd if=/dev/zero of=/swapfile bs=1024 count=1048576
-```
