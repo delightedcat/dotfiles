@@ -120,7 +120,7 @@ This goes at the cost of precious SSD/HDD write cycles. This is why I recommend 
 
 I usually do this by adding the following line to `/etc/fstab`:
 ```
-tmpfs		/var/tmp/portage		tmpfs	size=4G,uid=portage,gid=portage,mode=775,nosuid,noatime,nodev	0 0
+tmpfs /var/tmp/portage tmpfs size=4G,uid=portage,gid=portage,mode=775,nosuid,noatime,nodev 0 0
 ```
 You can now run `mount -a` to mount everything in `/etc/fstab`. The TMPFS should now be mounted on `/var/tmp/portage` according to `df -h`.
 
@@ -132,7 +132,7 @@ The Gentoo handbook recommends creating a swap partition that's twice the size o
 In fact, I recommend to not create a swap partition at all. Instead, I recommend using a swapfile since it can be resized dynamically and give your root partition more space.
 
 A swapfile is usually a plain file named `/swapfile` or simply `/swap` that is pre-allocated and formatted as a swap filesystem.
-```
+```sh
 # creates a swapfile at /swapfile of 1 GB in size
 # the count can be determined by doing: count = <size in bytes> / bs
 dd if=/dev/zero of=/swapfile bs=1024 count=1048576
