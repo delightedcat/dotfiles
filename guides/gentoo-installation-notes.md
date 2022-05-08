@@ -10,7 +10,7 @@ Please note that these steps differ from user to user and you should always tail
 
 - Setup a network connection (usually automatic through ethernet);
 - Partition the disk (~256M for `/boot` and the rest for `/`);
-- Create filesystems on partitions (VFAT for `/boot` and ext4 for `/`);
+- Create filesystems on partitions (VFAT for `/boot` and ext4 for `/`, no swap; this will be discussed later);
 - Mount root filesystem on `/mnt/gentoo`;
 - Download and install the stage3 tarball;
 - Setup compile options in `/etc/portage/make.conf` (i.e. `MAKEOPTS` and `EMERGE_DEFAULT_OPTS`);
@@ -23,9 +23,10 @@ Please note that these steps differ from user to user and you should always tail
 - Set the corresponding profile (`eselect profile list` and `eselect profile set <number>`);
 - Set up the corresponding `USE` and license/keyword flags in `/etc/portage/make.conf`;
 - Set up `CPU_FLAGS_X86` using `cpuid2cpuflags` (`emerge --oneshot cpuid2cpuflags`);
+- Mount a TMPFS on `/var/tmp/portage` to save lots of write cycles (this will be discussed later);
 - Run `@world` update (`emerge --ask --verbose --update --newuse --deep @world`);
 - Set up timezone and locale (`/etc/timezone` and `/etc/locale.gen` with `eselect locale list` and `eselect locale set <number>`);
-- Install `sys-kernel/gentoo-kernel` (we'll replace this with a custom kernel once the system boots);
+- Install `sys-kernel/gentoo-kernel` (we'll replace this with a custom kernel once the system boots and will be discussed later);
 - Set up `/etc/fstab` using the `blkid` command;
 - Set up networking information (`/etc/init.d/hostname` and `/etc/init.d/net`; options: `dns_domain_lo` and `config_<interface>`);
 - Set up loopback device symlink to enable networking on boot (`cd /etc/init.d` and `ln -s net.lo net.<interface>` and `rc-update add net.<interface> default`);
@@ -91,4 +92,48 @@ Using this list of used firmware modules, you can embed the firmware blobs in th
 ```sh
 # copy-paste the output of this command and paste it in EXTRA_FIRMWARE in /usr/src/linux/.config
 while read $(cat /etc/portage/savedconfig/sys-kernel/linux-firmware<version> | grep -v '^#') ; do echo -n $LINE ; done
+```
+
+### Use Git with Portage
+
+Surely good ol' rsync is a great tool to transfer and files between two systems. But rsync has its limitations (e.g. may only sync once a day according to the Gentoo Netiquette as shown in the output of `emerge --sync` when using rsync).
+Instead of using rsync, I prefer to use Git to keep my Portage tree in sync.
+
+First off, we need to install Git itself using `emerge --ask dev-vcs/git`. We can then write the following configuration to `/etc/portage/repos.conf/gentoo.conf`:
+```
+[DEFAULT]
+main-repo = gentoo
+
+[gentoo]
+location = /var/db/repos/gentoo
+sync-type = git
+sync-uri = git://anongit.gentoo.org/repo/sync/gentoo.git
+auto-sync = yes
+```
+You should then delete `/var/db/repos/gentoo` and run `emerge --sync` to pull everything in. Note that the second sync takes a bit longer than usual for some reason, but it usually just takes some patience.
+If something actually does go wrong, you can roll back to the original Portage configuration by copying `/usr/share/portage/config/repos.conf` back into place.
+
+### Save Disk Read/Write Cycles Using TMPFS
+
+Compiling is actually a pretty intensive task on the disk. Artifacts are constantly being written and read all over the place.
+This goes at the cost of precious SSD/HDD write cycles. This is why I recommend setting up a TMPFS and mount it on `/var/tmp/portage`.
+
+I usually do this by adding the following line to `/etc/fstab`:
+```
+tmpfs		/var/tmp/portage		tmpfs	size=4G,uid=portage,gid=portage,mode=775,nosuid,noatime,nodev	0 0
+```
+You can now run `mount -a` to mount everything in `/etc/fstab`. The TMPFS should now be mounted on `/var/tmp/portage` according to `df -h`.
+
+Note that you should set the size according to how much RAM you can spare as temporary disk space. In my case I have 32 GB of RAM with a 4 GB swapfile, therefore I set the size to 32 GB. This is larger than what most packages will require.
+
+### Don't Create a Swap Partition
+
+The Gentoo handbook recommends creating a swap partition that's twice the size of the available RAM. This is absurd to do for most modern systems.
+In fact, I recommend to not create a swap partition at all. Instead, I recommend using a swapfile since it can be resized dynamically and give your root partition more space.
+
+A swapfile is usually a plain file named `/swapfile` or simply `/swap` that is pre-allocated and formatted as a swap filesystem.
+```
+# creates a swapfile at /swapfile of 1 GB in size
+# the count can be determined by doing: count = <size in bytes> / bs
+dd if=/dev/zero of=/swapfile bs=1024 count=1048576
 ```
