@@ -42,3 +42,50 @@ Please note that these steps differ from user to user and you should always tail
 - Install bootloader on `/boot` (e.g. `grub-install --target=x86_64-efi --efi-directory=/boot --removable` and `grub-mkconfig -o /boot/grub/grub.cfg`);
 - Reboot the system and verify everything is working;
 
+### Custom Kernel
+
+As you might have noticed, compiling a kernel through `sys-kernel/gentoo-kernel` or `genkernel` takes a very long time.
+The reason for this is that both tools will compile with as many options enabled as possible.
+
+The solution is compiling a custom kernel. Yes, it does sound scary, but the worst that can happen is that you'll need to
+boot into your old kernel which is possible through GRUB's boot menu.
+
+Compiling a kernel by hand is difficult in this day and age. Hardware is becoming exponentially more complicated.
+Therefore it's my personal opinion that compiling a kernel by going through each option by hand is hard to do and probably not worth it, even using `lsmod` and `lspci` and all those tools.
+
+My personal solution is basing the kernel off the previously installed kernel and enabling only what you need through `make localmodconfig`. The process looks mostly like this:
+```
+# sys-kernel/gentoo-sources is emerged with the symlink flag enabled
+emerge --ask gentoo-sources
+cd /usr/src/linux
+# import the config of the current kernel
+make oldconfig
+# enable only the modules that are needed for this machine's hardware
+make localmodconfig
+make -j$(nproc)
+make modules_install install
+# install a tool that handles creating an initramfs for tools that are needed during early boot
+emerge --ask dracut
+dracut --hostonly
+# update the bootloader's configuration
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+#### Handling Firmware Blobs
+
+Note that it's recommend to not load redistributed firmware from `linux-firmware` in userspace.
+The best solution to this problem is to embed the binary firmware blobs directly into the kernel.
+
+```
+# sys-kernel/linux-firmware is emerged with savedconfig enabled to modify which firmware is installed
+emerge --ask linux-firmware
+# write the currently loaded firmware blobs (only works right after a reboot)
+dmesg | grep -i firmware | tee firmware.txt
+```
+You can now modify `/etc/portage/savedconfig/sys-kernel/linux-firmware<version>` to only contain the needed firmware according to `dmesg` and re-emerge `linux-firmware`.
+
+Using this list of used firmware modules, you can embed the firmware blobs in the `EXTRA_FIRMWARE` option in the kernel configuration.
+```
+# copy-paste the output of this command and paste it in EXTRA_FIRMWARE in /usr/src/linux/.config
+while read $(cat /etc/portage/savedconfig/sys-kernel/linux-firmware<version> | grep -v '^#') ; do echo -n $LINE ; done
+```
