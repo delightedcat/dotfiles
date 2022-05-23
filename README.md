@@ -19,3 +19,6 @@ It's my personal preconfigured set of Neovim plugins and settings.
 - `scripts` - Some useful scripts to automate annoying tasks;
 - `themes` - Mostly GTK desktop themes that I use on the desktop;
 - `xfce4` - Some of my custom configurations for the Xfce4 desktop environment.
+
+**DISCLAIMER:** None of the scripts located in the `scripts` directory come with any kind of warranty.
+Moreoever I'm not responsible for any damage done by any of said scripts.
