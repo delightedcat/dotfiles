@@ -17,14 +17,14 @@ the following steps:
 Here's a rough summary of the commands needed to achieve the above.
 
 ### Update all system packages
-```
+```sh
 apt update
 apt dist-upgrade
 reboot
 ```
 
 ### Purge and hold snapd
-```
+```sh
 snap list
 # delete all snaps in the list such as;
 snap remove --purge lxd
@@ -38,26 +38,26 @@ rm -rf /root/snap
 ```
 
 ### Install utilities
-```
+```sh
 apt install net-tools
 ```
 
 ### Move SSH to a different port
-```
+```diff
 #/etc/ssh/sshd_config
 -Port 22
 +Port 1337
 ```
 
 ### Install and set up endlessh
-```
+```sh
 apt install endlessh
 ```
 Follow the instructions in `/var/lib/systemd/system/endlessh.service`.
 Also create a config according to [the endlessh README](https://github.com/skeeto/endlessh).
 
 ### Configure the firewall through ufw
-```
+```sh
 ufw default deny incoming
 ufw default deny outgoing
 ufw allow 22/tcp
@@ -66,7 +66,7 @@ ufw enable
 ```
 
 ### Create a swapfile and configure it
-```
+```sh
 dd if=/dev/zero of=/var/swap bs=1024 count=1048576
 chmod 600 /var/swap
 mkswap /var/swap
@@ -77,7 +77,7 @@ Add the following rule to `/etc/fstab`:
 /var/swap swap swap sw 0 0
 ```
 Set up a proper production-level swappiness:
-```
+```sh
 echo "vm.swappiness=10" > /etc/sysctl.d/99-swappiness.conf
 sysctl --system
 sysctl vm.swappiness
