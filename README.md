@@ -16,7 +16,6 @@ It's my personal preconfigured set of Neovim plugins and settings.
 - `backgrounds` - A set of backgrounds that I use on the desktop;
 - `gtk-3.0` - Custom GTK 3.0 settings - should be copied into `~/.config/gtk-3.0`;
 - `guides` - Some guides for myself and others for some repetitive jobs;
-- `scripts` - Some useful scripts to automate annoying tasks;
 - `themes` - Mostly GTK desktop themes that I use on the desktop;
 - `xfce4` - Some of my custom configurations for the Xfce4 desktop environment.
 
