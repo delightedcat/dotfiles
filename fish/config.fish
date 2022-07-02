@@ -5,4 +5,5 @@ if status is-interactive
     setxkbmap -option "caps:escape"
 end
 
+set fish_greeting
 ssh-add $HOME/.ssh/github.com.key >/dev/null 2>&1
