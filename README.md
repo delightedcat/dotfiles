@@ -3,12 +3,12 @@
 My preferred development machine and project configurations files.
 I use the [Darkbox](https://github.com/delightedcat/darkbox-gtk.git) desktop theme and patched [Hack](https://sourcefoundry.org/hack/) font.
 
-## Text Editor
+### Text Editor
 
 My editor of choice is [GruvArt](https://github.com/delightedcat/gruvart).
 It's my personal preconfigured set of Neovim plugins and settings.
 
-## Layout
+### Layout
 
 - `avatars` - A bunch of image files that I use as avatars across the internet;
 - `backgrounds` - A set of backgrounds that I use on the desktop;
