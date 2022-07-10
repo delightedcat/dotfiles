@@ -1,0 +1,1 @@
+>=sys-fs/ncdu-2
