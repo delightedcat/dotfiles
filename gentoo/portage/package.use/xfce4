@@ -1,2 +1,5 @@
+xfce-base/libxfce4ui -startup-notification
+x11-libs/libwnck -startup-notification
+xfce-base/xfwm4 -startup-notification
 dev-libs/libdbusmenu gtk3
 xfce-base/xfdesktop -thunar
